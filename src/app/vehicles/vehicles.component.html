@@ -5,6 +5,7 @@
 		[value]="vehicles"
 		dataKey="licensePlate"
 		[loading]="loading"
+		responsiveLayout="stack"
 		[globalFilterFields]="['name', 'manufacturer', 'model', 'year', 'type', 'fuelType', 'licensePlate']"
 	>
 		<ng-template pTemplate="caption">
@@ -34,14 +35,29 @@
 		</ng-template>
 		<ng-template pTemplate="body" let-vehicle>
 			<tr>
-				<td>{{ vehicle.name | formatName }}</td>
-				<td>{{ vehicle.manufacturer }}</td>
-				<td>{{ vehicle.model }}</td>
-				<td>{{ vehicle.year }}</td>
-				<td>{{ vehicle.type }}</td>
-				<td>{{ vehicle.fuelType }}</td>
-				<td>{{ vehicle.licensePlate }}</td>
 				<td>
+					<span class="p-column-title">Name</span>{{ vehicle.name | formatName }}
+				</td>
+				<td>
+					<span class="p-column-title">Manufacturer</span>{{ vehicle.manufacturer }}
+				</td>
+				<td>
+					<span class="p-column-title">Model</span>{{ vehicle.model }}
+				</td>
+				<td>
+					<span class="p-column-title">Year</span>{{ vehicle.year }}
+				</td>
+				<td>
+					<span class="p-column-title">Type</span>{{ vehicle.type }}
+				</td>
+				<td>
+					<span class="p-column-title">Fuel Type</span>{{ vehicle.fuelType }}
+				</td>
+				<td>
+					<span class="p-column-title">License Plate</span>{{ vehicle.licensePlate }}
+				</td>
+				<td>
+					<span class="p-column-title">Active</span>
 					<i class="pi" [ngClass]="{
 						'text-green-500 pi-check-circle': vehicle.active,
 						'text-red-500 pi-times-circle': !vehicle.active
