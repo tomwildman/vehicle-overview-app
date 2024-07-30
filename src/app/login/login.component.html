@@ -1,0 +1,66 @@
+	<div class="flex flex-column align-items-center">
+		<h1>Sign in to AVL Vehicle Overview App</h1>
+
+		<p-messages *ngIf="authenticationFailed" [value]="[{
+			severity: 'error',
+			detail: 'Login failed. Please try again'
+		}]" [enableService]="false" [closable]="false"/>
+
+		<form (ngSubmit)="authenticate()" [formGroup]="credentials">
+			<div class="field">
+				<label for="login">Login</label>
+				<input 
+					id="login"
+					type="text"
+					class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					formControlName="login"
+				/>
+				<p-messages
+					*ngIf="credentials.controls.login.dirty && credentials.controls.login.hasError('required')"
+					[value]="[{
+						severity: 'error',
+						detail: 'Login is required'
+					}]"
+					[enableService]="false"
+				/>
+			</div>
+
+			<div class="field">
+				<label for="password">Password</label>
+				<input
+					id="password"
+					type="password"
+					class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+					formControlName="password"
+				/>
+				<p-messages
+					*ngIf="credentials.controls.password.dirty && credentials.controls.password.hasError('required')"
+					[value]="[{
+						severity: 'error',
+						detail: 'Password is required'
+					}]"
+					[enableService]="false"
+				/>
+
+				<p-messages
+					*ngIf="credentials.controls.password.dirty && credentials.controls.password.hasError('tooShort')"
+					[value]="[{
+						severity: 'error',
+						detail: 'Password needs to have at least 8 characters'
+					}]"
+					[enableService]="false"
+				/>
+
+				<p-messages
+					*ngIf="credentials.controls.password.dirty && credentials.controls.password.hasError('poorQuality')"
+					[value]="[{
+						severity: 'error',
+						detail: 'Password needs to have at least one capital letter and one special character'
+					}]"
+					[enableService]="false"
+				/>
+			</div>
+
+			<p-button type="submit" [disabled]="credentials.invalid">Sign In</p-button>
+		</form>
+	</div>
