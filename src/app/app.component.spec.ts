@@ -1,35 +1,30 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { Menubar, MenubarModule } from 'primeng/menubar';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      MenubarModule
+    ],
+    declarations: [ Menubar ],
+    schemas: [NO_ERRORS_SCHEMA]
+  }).compileComponents());
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'VehicleOverviewApp'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('VehicleOverviewApp');
-  });
-
-  it('should render title', () => {
+  it('should have a title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('VehicleOverviewApp app is running!');
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('h1')!.textContent).withContext('You should have an `h1` with the text Vehicle Overview App').toContain('Vehicle Overview App');
+  });
+
+  it('should use the menu component', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const element = fixture.debugElement.nativeElement;
+    expect(element.querySelector('app-menu'))
+    .withContext('You probably forgot to add MenuComponent to the AppComponent template')
+    .not.toBeNull();
   });
 });
