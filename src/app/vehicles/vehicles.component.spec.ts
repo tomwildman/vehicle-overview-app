@@ -1,23 +1,30 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { VehiclesComponent } from './vehicles.component';
+import { TableModule } from 'primeng/table';
+import { FormatNamePipe } from '../format-name.pipe';
 
 describe('VehiclesComponent', () => {
   let component: VehiclesComponent;
   let fixture: ComponentFixture<VehiclesComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ VehiclesComponent ]
-    })
-    .compileComponents();
+  beforeEach(() => 
+    TestBed.configureTestingModule({
+      declarations: [
+        VehiclesComponent,
+        FormatNamePipe
+      ],
+      imports: [TableModule]
+    }));
 
-    fixture = TestBed.createComponent(VehiclesComponent);
-    component = fixture.componentInstance;
+  it('should display every vehicle', fakeAsync(() => {
+    const fixture = TestBed.createComponent(VehiclesComponent);
+
+    tick(1100);
+
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    const element = fixture.nativeElement as HTMLElement;
+    const vehicles = element.querySelectorAll('table tbody tr');
+    expect(vehicles.length).withContext('You should have an `tr` element per vehicle in your template').toBe(15);
+  }));
 });

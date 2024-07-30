@@ -11,4 +11,9 @@ describe('Vehicle Overview App', () => {
 
 		cy.contains(menubarStart, 'Vehicle Overview App');
 	});
+
+	it('should display a vehicles table', () => {
+		cy.visit('/');
+		cy.get('tbody tr').should('have.length', 15);
+	})
 });

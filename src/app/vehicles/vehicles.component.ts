@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { VEHICLES } from '../core/vehicle/vehicle.constants';
+import { Component, OnInit } from '@angular/core';
+import { VehicleModel } from '../models/vehicle.model';
+import { VehicleService } from '../vehicle.service';
 
 @Component({
   selector: 'app-vehicles',
@@ -8,7 +9,13 @@ import { VEHICLES } from '../core/vehicle/vehicle.constants';
 })
 export class VehiclesComponent {
 
-  vehicles = VEHICLES;
+  vehicles: VehicleModel[] = [];
+  loading: boolean = true;
 
-  loading: boolean = false;
+  constructor(vehicleService: VehicleService) {
+    vehicleService.getVehicles().subscribe((vehicles: VehicleModel[]) => {
+      this.vehicles = vehicles;
+      this.loading = false;
+    });
+  }
 }

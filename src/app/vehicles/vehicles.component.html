@@ -32,7 +32,7 @@
 	</ng-template>
 	<ng-template pTemplate="body" let-vehicle>
 		<tr>
-			<td>{{ vehicle.name }}</td>
+			<td>{{ vehicle.name | formatName }}</td>
 			<td>{{ vehicle.manufacturer }}</td>
 			<td>{{ vehicle.model }}</td>
 			<td>{{ vehicle.year }}</td>

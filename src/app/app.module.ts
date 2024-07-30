@@ -10,12 +10,13 @@ import { TagModule } from 'primeng/tag';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VehicleService } from './core/vehicle/vehicle.service';
+import { VehicleService } from './vehicle.service';
 import { MenuComponent } from './menu/menu.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { FormatNamePipe } from './format-name.pipe';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, VehiclesComponent],
+  declarations: [AppComponent, MenuComponent, VehiclesComponent, FormatNamePipe],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
